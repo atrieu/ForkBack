@@ -8,3 +8,10 @@ env:
 - OCAML_VERSION=latest
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: W8C5UdMQRybKpDpGw/klsY/m8MKFSBorraAjXFj3/96RHX80T3HlOKmAH5s/FOFarHfmOUj/cwUDDmCn6xLf/UFaBAiSWy6pUwTpxjtvFUNC+fcFdekU9p0l7DbV4wYR1uaFRRoF5b0zbA+D6euNfDBHoo4EJ6cNg2g5ialEKSeI1EE0SHwN+PRR52AsxwPKJBTtKwqXRKlTzg30hhsZimaK7qTQC7DuoEAjyjH9sQKex6pc2mDXookM+oNP2gD3tbUkkBWjvR1eUzTNvNMIftWj2LejvBOLENTRDALV4t041QvlJ1zA85mPdeSe7wTF6bIJJrrTNczYGeMPwN96wid7QUIBYE2shUMfWW7RjxQDw3oNALV88CmBDjHYkHMCET9vPSIaUT4yC7dNWldMLpNGG2SoqhODz8ze4tvOokLkJ0Heh11rGSDcatv2i0oGAhmO3AvsAdzrJ0NMlVu8O9BpIUV2JsAlEJbcs75TiE3a8qLNuXw8HJfcgAc4B+2+PdlvNqqIpRUwgifJVjRkmgP9ynzVAyWPGwb0PNSDnm7kqQXUJJltz3rP841DaX8IPuo+agQMB/lCvqBesCba+wVIKBrBhFxQfc3+APTBxc0IGyqHg3ZJarvLYa5sO1auK0WScYEfysrSDPwq3ggPsttUmWYUnaNo5KsIYMk5gOc=
+  app: ForkBack
+  on:
+    repo: atrieu/ForkBack

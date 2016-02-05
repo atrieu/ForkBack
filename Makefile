@@ -1,7 +1,7 @@
 .PHONY: all clean
 
 all:
-	ocamlbuild -pkg opium test.native
+	ocamlbuild -use-ocamlfind test.native
 
 clean:
 	rm -rf _build
