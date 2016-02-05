@@ -1,0 +1,11 @@
+opam-version: "1.2"
+version: "0.1"
+maintainer: "alix.trieu@ens-rennes.fr"
+
+build: [make]
+
+depends: [
+  "opium"
+]
+
+available: [ocaml-version >= "4.01.0"]
