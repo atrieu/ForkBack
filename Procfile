@@ -1,1 +1,1 @@
-web: ./server -p $PORT
+web: ./_build/test.native -p $PORT
