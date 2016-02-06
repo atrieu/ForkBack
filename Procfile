@@ -1,1 +1,1 @@
-web: test.native
+web: test.native -p $PORT
