@@ -2,6 +2,7 @@
 
 all:
 	ocamlbuild -use-ocamlfind test.native
+	mv test.native server
 
 clean:
 	rm -rf _build
