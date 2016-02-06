@@ -5,6 +5,7 @@ maintainer: "alix.trieu@ens-rennes.fr"
 build: [make]
 
 depends: [
+  "ocamlbuild"
   "opium"
   "postgresql"
 ]
