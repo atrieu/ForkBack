@@ -23,6 +23,7 @@ let print_scores req =
 let _ =
   try
     create_table_if_not_exists ();
+    insert "boss" "omg" 0 0;
     App.empty
     |> post "/" print_json
     |> get "/" (print_hello " world")
