@@ -24,7 +24,7 @@ let _ =
   try
     let c = connect () in
     let req = "CREATE TABLE IF NOT EXISTS my_table (
-	       user varchar NOT NULL,
+	       username varchar NOT NULL,
 	       password varchar NOT NULL,
 	       problem integer NOT NULL,
 	       score integer NOT NULL
