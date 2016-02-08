@@ -24,10 +24,17 @@ let _ =
   try
     create_table_if_not_exists ();
     insert "boss" "omg" 0 0;
-    App.empty
-    |> post "/" print_json
-    |> get "/" (print_hello " world")
-    |> App.run_command
+    let scores = scores 0 in
+    if Array.length scores = 0 then
+      App.empty
+      |> post "/" print_json
+      |> get "/" (print_hello " empty world")
+      |> App.run_command
+    else
+      App.empty
+      |> post "/" print_json
+      |> get "/" (print_hello " not empty world")
+      |> App.run_command
   with
   | _ -> App.empty
 	 |> post "/" print_json
