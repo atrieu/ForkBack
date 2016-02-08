@@ -22,8 +22,7 @@ let print_scores req =
   
 let _ =
   try
-    let c = connect () in
-    c#finish;
+    create_table_if_not_exists ();
     App.empty
     |> post "/" print_json
     |> get "/" (print_hello " world")
