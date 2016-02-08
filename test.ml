@@ -22,18 +22,17 @@ let print_scores req =
   
 let _ =
   try
-    create_table_if_not_exists ();
-    insert "boss" "omg" 0 0;
-    let scores = scores 0 in
-    if Array.length scores = 0 then
-      App.empty
+    let c = connect () in
+    let req = "CREATE TABLE IF NOT EXISTS table (
+	       user varchar NOT NULL,
+	       password varchar NOT NULL,
+	       problem integer NOT NULL,
+	       score integer NOT NULL
+	     )" in
+    let res = c#exec req in
+    App.empty
       |> post "/" print_json
-      |> get "/" (print_hello " empty world")
-      |> App.run_command
-    else
-      App.empty
-      |> post "/" print_json
-      |> get "/" (print_hello " not empty world")
+      |> get "/" (print_hello res#error)
       |> App.run_command
   with
   | _ -> App.empty
