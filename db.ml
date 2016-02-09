@@ -42,7 +42,7 @@ let has_score user password =
 
 let insert user password problem score =
   let c = connect () in
-  let req = Printf.sprintf "INSERT INTO table VALUES ('%s', '%s', %d, %d);" user password problem score in
+  let req = Printf.sprintf "INSERT INTO my_table VALUES ('%s', '%s', %d, %d);" user password problem score in
   ignore (c#exec req);
   c#finish
  
