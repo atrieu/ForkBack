@@ -10,7 +10,11 @@ let print_json req =
   let json = try Ezjsonm.from_string s with
 	     | _ -> Ezjsonm.from_string "{\"message\": \"Ill-formed json\"}" in
   respond (`Json json)
-	    
+
+let print_scores n req =
+  let scores = scores n in
+  respond' (`String (Array.fold_right scores ~f:(fun a acc -> a.(0) ^ " " ^ a.(1) ^ "\n" ^ acc) ~init:""))
+	  
 let register req =
   App.string_of_body_exn req >>| fun s ->
   let json = try
@@ -30,6 +34,6 @@ let _ =
   App.empty
   |> post "/register" register
   |> post "/" print_json
-  |> get "/" (print_hello " world")
+  |> get "/" (print_scores 0)
   |> App.run_command
        
