@@ -33,9 +33,9 @@ let is_registered username =
   let is_registered = Array.length res#get_all > 0 in
   c#finish; is_registered
 	      
-let has_score user password =
+let has_score user password problem =
   let c = connect () in
-  let req = Printf.sprintf "SELECT * FROM my_table where username = '%s' AND password = '%s';" user password in
+  let req = Printf.sprintf "SELECT * FROM my_table where username = '%s' AND password = '%s' AND problem = %d;" user password problem in
   let res = c#exec req in
   let has_score = Array.length res#get_all > 0 in
   c#finish; has_score
