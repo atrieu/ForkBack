@@ -1,6 +1,6 @@
 open Postgresql
 
-(* user, password, problem, score *)
+(* username, password, problem, score *)
        
 let connect () =
   let url = Sys.getenv "DATABASE_URL" in
@@ -10,8 +10,8 @@ let connect () =
 
 let create_table_if_not_exists () =
   let c = connect () in
-  let req = "CREATE TABLE IF NOT EXISTS table (
-	     user varchar NOT NULL,
+  let req = "CREATE TABLE IF NOT EXISTS my_table (
+	     username varchar NOT NULL,
 	     password varchar NOT NULL,
 	     problem integer NOT NULL,
 	     score integer NOT NULL
@@ -21,14 +21,21 @@ let create_table_if_not_exists () =
   
 let scores n =  
   let c = connect () in
-  let req = Printf.sprintf "SELECT user, score FROM table WHERE problem = %d ORDER BY score;" n in
+  let req = Printf.sprintf "SELECT username, score FROM my_table WHERE problem = %d ORDER BY score;" n in
   let res = c#exec req in
   let scores = res#get_all in
   c#finish; scores
 
+let is_registered username =
+  let c = connect () in
+  let req = Printf.sprintf "SELECT * FROM my_table where username = '%s';" username in
+  let res = c#exec req in
+  let is_registered = Array.length res#get_all > 0 in
+  c#finish; is_registered
+	      
 let has_score user password =
   let c = connect () in
-  let req = Printf.sprintf "SELECT * FROM table where user = '%s' AND password = '%s';" user password in
+  let req = Printf.sprintf "SELECT * FROM my_table where username = '%s' AND password = '%s';" user password in
   let res = c#exec req in
   let has_score = Array.length res#get_all > 0 in
   c#finish; has_score
@@ -39,3 +46,8 @@ let insert user password problem score =
   ignore (c#exec req);
   c#finish
  
+let change_score username password problem score =
+  let c = connect () in
+  let req = Printf.sprintf "UPDATE my_table SET score = %d WHERE username = '%s' AND password = '%s' AND problem = %d;" score username password problem in
+  ignore (c#exec req);
+  c#finish
