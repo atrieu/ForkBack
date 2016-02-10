@@ -21,7 +21,7 @@ let create_table_if_not_exists () =
   
 let scores n =  
   let c = connect () in
-  let req = Printf.sprintf "SELECT username, score FROM my_table WHERE problem = %d ORDER BY score;" n in
+  let req = Printf.sprintf "SELECT username, score FROM my_table WHERE problem = %d ORDER BY score DESC;" n in
   let res = c#exec req in
   let scores = res#get_all in
   c#finish; scores
