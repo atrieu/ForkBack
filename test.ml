@@ -67,6 +67,7 @@ let submit req =
   respond (`Json json)
       
 let _ =
+  let _ = create_table_if_not_exists () in
   App.empty
   |> middleware allow_cors
   |> post "/register" register
