@@ -28,8 +28,8 @@ let print_json req =
 
 let print_scores n req =
   let scores = scores n in
-  let s = Array.foldi ~f:(fun n acc a -> acc ^ (string_of_int (n + 1)) ^ ". " ^ a.(0) ^ " " ^ a.(1) ^ "\n") ~init:"" scores in
-  let json = Ezjsonm.from_string (Printf.sprintf "{\"status\": 1, \"message\": \"%s.\"}" s) in
+  let s = Array.foldi ~f:(fun n acc a -> acc ^ (string_of_int (n + 1)) ^ ". " ^ a.(0) ^ " " ^ a.(1) ^ "\\n") ~init:"" scores in
+  let json = Ezjsonm.from_string (Printf.sprintf "{\"status\": 1, \"message\": \"%s\"}" s) in
   respond' (`Json json)
 	  
 let register req =
