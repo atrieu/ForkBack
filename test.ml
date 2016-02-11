@@ -3,6 +3,23 @@ open Opium.Std
 open Db
 open Scoring
 
+let add_cors_headers (headers: Cohttp.Header.t): Cohttp.Header.t =
+  Cohttp.Header.add_list headers [
+    ("access-control-allow-origin", "*");
+    ("access-control-allow-headers", "Accept, Content-Type");
+    ("access-control-allow-methods", "GET, HEAD, POST, DELETE, OPTIONS, PUT, PATCH")
+  ]
+
+let allow_cors =
+  let filter handler req =
+    handler req >>| fun response -> 
+    response 
+    |> Response.headers
+    |> add_cors_headers
+    |> Field.fset Response.Fields.headers response
+  in 
+    Rock.Middleware.create ~name:(Info.of_string "allow cors") ~filter
+       
 let print_json req =
   App.string_of_body_exn req >>| fun s ->
   let json = try Ezjsonm.from_string s with
@@ -50,6 +67,7 @@ let submit req =
       
 let _ =
   App.empty
+  |> middleware allow_cors
   |> post "/register" register
   |> post "/submit" submit
   |> post "/" print_json
